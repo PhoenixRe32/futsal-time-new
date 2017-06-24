@@ -1,4 +1,4 @@
-package com.futsaltime.futsaltime;
+package com.futsaltime;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
