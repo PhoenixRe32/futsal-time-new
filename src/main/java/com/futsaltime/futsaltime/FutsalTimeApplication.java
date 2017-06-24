@@ -1,12 +1,12 @@
-package com.example.demo;
+package com.futsaltime.futsaltime;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class FutsalTimeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(FutsalTimeApplication.class, args);
 	}
 }
