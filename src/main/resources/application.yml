@@ -1,0 +1,24 @@
+server:
+  port: 8000
+
+endpoints:
+  enabled: true
+  sensitive: false
+
+spring:
+  datasource:   # DataSource settings: set here your own configurations for the database
+    url: jdbc:mysql://localhost:3306/futsaltime
+    type: com.zaxxer.hikari.HikariDataSource
+    username: root
+    password: root
+    testWhileIdle: true # Keep the connection alive if idle for a long time (needed in production)
+    validationQuery: SELECT 1
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    # Use spring.jpa.properties.* for Hibernate native properties (the prefix is stripped before adding them to the entity manager)
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect # To force the engine to InnoDB
+        format_sql: true
