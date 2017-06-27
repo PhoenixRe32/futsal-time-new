@@ -6,7 +6,7 @@ endpoints:
   sensitive: false
 
 spring:
-  datasource:   # DataSource settings: set here your own configurations for the database
+  datasource: # DataSource settings: set here your own configurations for the database
     url: jdbc:mysql://localhost:3306/futsaltime
     type: com.zaxxer.hikari.HikariDataSource
     username: root
