@@ -16,7 +16,7 @@ public class FacilityService implements IFacilityService {
 	}
 
 	@Override
-	public Iterable<Facility> retrieveAllFacilities() {
+	public Iterable<Facility> getFacilities() {
 		return facilityRepository.findAll();
 	}
 }

@@ -20,8 +20,11 @@ public class Facility {
 		this.facilityName = facilityName;
 	}
 
-	@Override
-	public String toString() {
-		return "Facility No " + id + ": " + facilityName;
+	public Long getId() {
+		return id;
+	}
+
+	public String getFacilityName() {
+		return facilityName;
 	}
 }
