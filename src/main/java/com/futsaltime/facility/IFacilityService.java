@@ -4,5 +4,5 @@ import com.futsaltime.database.models.Facility;
 
 public interface IFacilityService {
 
-	Iterable<Facility> getFacilities();
+	Iterable<Facility> list();
 }

@@ -16,7 +16,7 @@ class FacilityControllerTest extends Specification {
         def result = facilityController.list()
 
         then:
-        1 * facilityService.getFacilities() >> [
+        1 * facilityService.list() >> [
                 new Facility('Facility 1'),
                 new Facility('Facility 2')
         ]
@@ -35,7 +35,7 @@ class FacilityControllerTest extends Specification {
         def result = facilityController.list()
 
         then:
-        1 * facilityService.getFacilities() >> responseFromService
+        1 * facilityService.list() >> responseFromService
 
         assert result
         assert result.statusCode == HttpStatus.OK
