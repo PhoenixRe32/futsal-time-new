@@ -43,4 +43,44 @@ class FacilityServiceTest extends Specification {
         def facilities = result.asList()
         assert facilities.isEmpty()
     }
+
+    def "successfully adds a facility"() {
+        given:
+        def facilityName = 'Facility1'
+        def facilityDto = new FacilityDto(facilityName: facilityName)
+
+        when:
+        def result = facilityService.add(facilityDto)
+
+        then:
+        1 * facilityRepository.save(*_) >> { arguments ->
+            final Facility facility = arguments[0] as Facility
+            assert facility.facilityName == facilityName
+            new Facility(facilityName: facilityName)
+        }
+
+        assert result.class == Facility.class
+
+        def facilityAdded = result as Facility
+        assert facilityAdded.facilityName == facilityName
+        assert facilityAdded.id != 0
+    }
+
+    def "fails to add facility because repository throws exception"() {
+        given:
+        def facilityName = 'Facility1'
+        def facilityDto = new FacilityDto(facilityName: facilityName)
+
+        when:
+        facilityService.add(facilityDto)
+
+        then:
+        1 * facilityRepository.save(*_) >> { arguments ->
+            final Facility facility = arguments[0] as Facility
+            assert facility.facilityName == facilityName
+            throw new Exception()
+        }
+
+        Exception ex = thrown()
+    }
 }
