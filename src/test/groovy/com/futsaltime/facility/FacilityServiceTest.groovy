@@ -6,9 +6,9 @@ import spock.lang.Specification
 
 class FacilityServiceTest extends Specification {
 
-    FacilityService facilityService
+    private FacilityService facilityService
 
-    IFacilityRepository facilityRepository
+    private IFacilityRepository facilityRepository
 
     def setup() {
         facilityRepository = Mock()
@@ -49,16 +49,17 @@ class FacilityServiceTest extends Specification {
         def facilityName = 'Facility1'
         def facilityDto = new FacilityDto(facilityName: facilityName)
 
-        when:
-        def result = facilityService.add(facilityDto)
-
-        then:
         1 * facilityRepository.save(*_) >> { arguments ->
+            assert arguments.size() == 1
             final Facility facility = arguments[0] as Facility
             assert facility.facilityName == facilityName
             new Facility(facilityName: facilityName)
         }
 
+        when:
+        def result = facilityService.add(facilityDto)
+
+        then:
         assert result.class == Facility.class
 
         def facilityAdded = result as Facility
@@ -71,16 +72,17 @@ class FacilityServiceTest extends Specification {
         def facilityName = 'Facility1'
         def facilityDto = new FacilityDto(facilityName: facilityName)
 
-        when:
-        facilityService.add(facilityDto)
-
-        then:
         1 * facilityRepository.save(*_) >> { arguments ->
+            assert arguments.size() == 1
             final Facility facility = arguments[0] as Facility
             assert facility.facilityName == facilityName
             throw new Exception()
         }
 
+        when:
+        facilityService.add(facilityDto)
+
+        then:
         Exception ex = thrown()
     }
 }

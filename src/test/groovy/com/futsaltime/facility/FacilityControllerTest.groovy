@@ -11,16 +11,15 @@ class FacilityControllerTest extends Specification {
 
     def "GET 'facilities/list' returns Success and the collection of facilities returned from the service"() {
         given:
-
-        when:
-        def result = facilityController.list()
-
-        then:
         1 * facilityService.list() >> [
                 new Facility('Facility 1'),
                 new Facility('Facility 2')
         ]
 
+        when:
+        def result = facilityController.list()
+
+        then:
         assert result
         assert result.statusCode == HttpStatus.OK
         assert result.body.size() == 2
