@@ -26,7 +26,7 @@ class FacilityServiceTest extends Specification {
 
         then:
         def facilities = result.asList()
-        assert !facilities.isEmpty()
+        assert facilities.size() == 2
         assert facilities[0] == facility1
         assert facilities[1] == facility2
 

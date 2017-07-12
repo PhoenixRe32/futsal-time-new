@@ -1,5 +1,6 @@
 package com.futsaltime;
 
+import com.futsaltime.database.models.Bookable;
 import com.futsaltime.database.models.Facility;
 import com.futsaltime.database.repositories.IFacilityRepository;
 import org.slf4j.Logger;
@@ -9,6 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -31,11 +35,23 @@ public class FutsalTimeApplication {
 	public CommandLineRunner demo(IFacilityRepository repository) {
 		return (String... args) -> {
 			// save a couple of customers
-			repository.save(new Facility("Jack"));
-			repository.save(new Facility("Chloe"));
-			repository.save(new Facility("Kim"));
-			repository.save(new Facility("David"));
-			repository.save(new Facility("Michelle"));
+			Facility thoi = new Facility("Thoi");
+			Collection<Bookable> thoiFields = Arrays.asList(
+					new Bookable(5, thoi),
+					new Bookable(5, thoi),
+					new Bookable(7, thoi),
+					new Bookable(9, thoi));
+			thoi.setBookables(thoiFields);
+			repository.save(thoi);
+
+			Facility paeek = new Facility("Paeek");
+			Collection<Bookable> paeekFields = Arrays.asList(
+					new Bookable(5, paeek),
+					new Bookable(6, paeek),
+					new Bookable(9, paeek),
+					new Bookable(10, paeek));
+			paeek.setBookables(paeekFields);
+			repository.save(paeek);
 
 			// fetch all Facilitys
 			log.info("Facilitys found with findAll():");
